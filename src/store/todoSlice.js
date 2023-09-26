@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const todoSlice = createSlice({
     name: 'todos',
     initialState: {
-        todos: []
+        todos: [],
+        oneTodo: null
     },
     reducers: {
         addTodo: (state, action) => {
@@ -13,9 +14,13 @@ const todoSlice = createSlice({
         changeTodoStatus: (state, action) => {
             const todo = state.todos.find(todo => todo.id === action.payload);
             todo.status = !todo.status;
+        },
+        getOneTodo: (state, action) => {
+            const oneTodo = state.todos.find(todo => todo.id == action.payload);
+            state.oneTodo = oneTodo;
         }
     }
 });
 
-export const { addTodo, changeTodoStatus } = todoSlice.actions;
+export const { addTodo, changeTodoStatus, getOneTodo } = todoSlice.actions;
 export default todoSlice.reducer;
